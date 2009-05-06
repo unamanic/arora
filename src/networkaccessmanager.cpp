@@ -128,11 +128,13 @@ NetworkAccessManager::NetworkAccessManager(QObject *parent)
     loadSettings();
 
 #if QT_VERSION >= 0x040500
-    QNetworkDiskCache *diskCache = new QNetworkDiskCache(this);
-    QString location = QDesktopServices::storageLocation(QDesktopServices::CacheLocation)
-                            + QLatin1String("/browser");
-    diskCache->setCacheDirectory(location);
-    setCache(diskCache);
+    if (QLatin1String(qVersion()) != QLatin1String("4.5.1")) {
+        QNetworkDiskCache *diskCache = new QNetworkDiskCache(this);
+        QString location = QDesktopServices::storageLocation(QDesktopServices::CacheLocation)
+                                + QLatin1String("/browser");
+        diskCache->setCacheDirectory(location);
+            setCache(diskCache);
+    }
 #endif
 }
 
