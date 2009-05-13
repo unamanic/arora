@@ -66,7 +66,11 @@ ClearPrivateData::ClearPrivateData(QWidget *parent)
     m_cache->setEnabled(false);
 #endif
 #if QT_VERSION >= 0x040500
-    m_cache->setChecked(true);
+    if (BrowserApplication::networkAccessManager()->cache()) {
+        m_cache->setChecked(true);
+    } else {
+        m_cache->setEnabled(false);
+    }
 #endif
     layout->addWidget(m_cache);
 
@@ -106,11 +110,11 @@ void ClearPrivateData::accept()
     if (m_cookies->isChecked()) {
         BrowserApplication::cookieJar()->clear();
     }
-    if (m_cache->isChecked()) {
 #if QT_VERSION >= 0x040500
+    if (m_cache->isChecked() && BrowserApplication::networkAccessManager()->cache()) {
         BrowserApplication::networkAccessManager()->cache()->clear();
-#endif
     }
+#endif
     if (m_favIcons->isChecked()) {
         QWebSettings::clearIconDatabase();
     }
