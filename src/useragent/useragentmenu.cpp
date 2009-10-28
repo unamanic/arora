@@ -11,6 +11,13 @@ UserAgentMenu::UserAgentMenu(QWidget *parent) : QMenu(parent)
 
 void UserAgentMenu::buildUserAgentMenu()
 {
+    DefaultUA *defaultUa = new DefaultUA(this);
+    defaultUa->setText(tr("Default"));
+    connect(defaultUa, SIGNAL(triggered()), defaultUa, SLOT(onAction()));
+    addAction(defaultUa);
+
+    addSeparator();
+
     QDomDocument doc("useragentswitcher");
     QFile file(":/useragents/useragents.xml");
     if( !doc.setContent( &file ) )
@@ -37,4 +44,16 @@ void UserAgentMenu::buildUserAgentMenu()
         }
         n = n.nextSibling();
     }
+}
+
+
+DefaultUA::DefaultUA(QWidget *parent) : QAction(parent)
+{
+}
+
+void DefaultUA::onAction()
+{
+    QSettings setting;
+    setting.remove(QLatin1String("useragent"));
+    setting.sync();
 }
