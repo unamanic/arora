@@ -4,9 +4,7 @@ mac {
     TARGET = Arora
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.4
 }
-DEFINES += QT_NO_CAST_FROM_ASCII \
-    QT_NO_CAST_TO_ASCII \
-    QT_STRICT_ITERATORS
+DEFINES += QT_STRICT_ITERATORS
 include(../install.pri)
 include(src.pri)
 SOURCES += main.cpp
@@ -51,3 +49,4 @@ include(locale/locale.pri)
     }
 }
 OTHER_FILES += 
+QT += xml
