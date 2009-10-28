@@ -227,9 +227,6 @@ void WebPage::addExternalBinding(QWebFrame *frame)
 
 QString WebPage::userAgentForUrl(const QUrl &url) const
 {
-    QSettings settings;
-    s_userAgent = settings.value(QLatin1String("userAgent")).toString();
-
     if (s_userAgent.isEmpty())
         s_userAgent = QWebPage::userAgentForUrl(url);
     return s_userAgent;

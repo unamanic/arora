@@ -87,7 +87,6 @@
 #include "toolbarsearch.h"
 #include "webview.h"
 #include "webviewsearch.h"
-#include "useragentmenu.h"
 
 #include <qdesktopwidget.h>
 #include <qevent.h>
@@ -836,12 +835,6 @@ void BrowserMainWindow::setupMenu()
             this, SLOT(showSearchDialog()));
     m_toolsMenu->addAction(m_toolsSearchManagerAction);
 
-     //UserAgentSwitcher
-    m_toolsUserAgentMenu = new UserAgentMenu(m_toolsMenu);
-    m_toolsUserAgentMenu->buildUserAgentMenu();
-    m_toolsMenu->addMenu(m_toolsUserAgentMenu);
-
-
     m_adBlockDialogAction = new QAction(m_toolsMenu);
     connect(m_adBlockDialogAction, SIGNAL(triggered()),
             AdBlockManager::instance(), SLOT(showDialog()));
@@ -1003,7 +996,6 @@ void BrowserMainWindow::retranslate()
     m_toolsPreferencesAction->setText(tr("Options..."));
     m_toolsPreferencesAction->setShortcut(tr("Ctrl+,"));
     m_toolsSearchManagerAction->setText(tr("Configure Search Engines..."));
-    m_toolsUserAgentMenu->setTitle(tr("UserAgent Switcher"));
     m_adBlockDialogAction->setText(tr("&Ad Block..."));
 
     m_helpMenu->setTitle(tr("&Help"));
@@ -1501,7 +1493,6 @@ void BrowserMainWindow::showSearchDialog()
     OpenSearchDialog dialog(this);
     dialog.exec();
 }
-
 
 void BrowserMainWindow::aboutToShowBackMenu()
 {
