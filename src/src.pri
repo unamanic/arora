@@ -6,7 +6,8 @@ win32:Debug:CONFIG += console
 INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 QT += webkit \
-    network
+    network\ 
+    xml
 
 # Share object files for faster compiling
 RCC_DIR = $$PWD/.rcc

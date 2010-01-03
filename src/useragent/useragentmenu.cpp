@@ -18,8 +18,8 @@ void UserAgentMenu::buildUserAgentMenu()
 
     addSeparator();
 
-    QDomDocument doc("useragentswitcher");
-    QFile file(":/useragents/useragents.xml");
+    QDomDocument doc(tr("useragentswitcher"));
+    QFile file(tr(":/useragents/useragents.xml"));
     if( !doc.setContent( &file ) )
     {
         file.close();

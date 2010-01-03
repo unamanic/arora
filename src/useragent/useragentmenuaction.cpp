@@ -28,7 +28,7 @@ void UserAgentMenuAction::setUserAgent(QString name, QString userAgent)
 
 void UserAgentMenuAction::onAction() {
     QSettings settings(QLatin1String("arora-browser.org"), QLatin1String("Arora"));
-    settings.setValue("userAgent",m_UserAgent->getUserAgentString());
+    settings.setValue(tr("userAgent"),m_UserAgent->getUserAgentString());
     settings.sync();
 
 }
